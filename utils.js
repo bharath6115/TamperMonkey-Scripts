@@ -62,9 +62,17 @@ var seriesGraph = {
         return res.results?.map(({ id }) => id) ?? [];
     },
 
+    generateSrc:
+    async function generateSrc(title){
+        const res = await seriesGraph.search(title);
+
+        return res.length === 1
+            ? `https://seriesgraph.com/show/${res[0]}`
+            : `https://seriesgraph.com/show/search/${encodeURIComponent(title)}`;
+    },
+
     generateIframe:
     async function generateIframe(title) {
-        const res = await seriesGraph.search(title);
 
         const block = document.createElement("div");
         block.id = "seriesGraphIframeBlock";
@@ -79,9 +87,7 @@ var seriesGraph = {
 
         const iframe = document.createElement("iframe");
         iframe.id = "seriesGraphIframe";
-        iframe.src = res.length === 1
-            ? `https://seriesgraph.com/show/${res[0]}`
-            : `https://seriesgraph.com/show/search/${encodeURIComponent(title)}`;
+        iframe.src = seriesGraph.generateSrc(title);
 
         container.appendChild(iframe);
         block.append(button, container);
@@ -96,6 +102,32 @@ var seriesGraph = {
         };
 
         return block;
+    },
+
+    generateIcon:
+    async function generateIcon(title){
+        const div = document.createElement("div");
+        div.id = "seriesGraphLinker";
+        div.style.float = "right";
+        div.style.userSelect = "none";
+        div.style.marginRight = "5px";
+        div.style.marginLeft = "5px";
+
+        const a = document.createElement("a");
+        a.href = seriesGraph.generateSrc(title);
+        a.target = "_blank";
+        a.title = "SeriesGraph";
+        a.className = "link";
+
+        const img = document.createElement("img");
+        img.src = "https://seriesgraph.com/favicon-16x16.png";
+        img.setAttribute("width","16");
+        img.setAttribute("height","15");
+
+        a.appendChild(img);
+        div.appendChild(a);
+
+        return div;
     },
 
     addStyles:
