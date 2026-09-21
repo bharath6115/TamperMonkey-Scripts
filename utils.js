@@ -1,7 +1,7 @@
 //Reusable Utility functions for Tamper Monkey
 
 globalThis.dataFetch = {
-    request({method = "GET", url, headers = {}, data = null, responseType = "json"}){
+    request: function request({method = "GET", url, headers = {}, data = null, responseType = "json"}){
         return new Promise((resolve, reject) => {
             GM_xmlhttpRequest({
                 method,
@@ -38,7 +38,7 @@ globalThis.dataFetch = {
 
 globalThis.seriesGraph = {
 
-    async search(query) {
+    search: async function search(query) {
         const res = await dataFetch.request({
             method: "GET",
             url: `https://seriesgraph.com/api/shows/search?searchTerm=${encodeURIComponent(query)}`
@@ -47,12 +47,12 @@ globalThis.seriesGraph = {
         return res.results?.map(({ id }) => id) ?? [];
     },
 
-    async generateIFrame() {
+    generateIFrame: async function generateIFrame(title) {
         const button = document.createElement("button");
         button.id = "seriesGraphIFRAMEButton";
         button.textContent = "Expand Series Graph";
 
-        const res = await query(title);
+        const res = await seriesGraph.search(title);
 
         button.onclick = () => {
             let container = document.querySelector("#seriesGraphIFRAMEContainer");
@@ -87,7 +87,7 @@ globalThis.seriesGraph = {
         return button;
     },
 
-    addStyles(){
+    addStyles: function addStyles(){
         if (document.querySelector("#seriesGraphStyles")) return;
 
         const style = document.createElement("style");
@@ -145,7 +145,7 @@ globalThis.seriesGraph = {
 
 globalThis.aniList = {
 
-    async search(search) {
+    search: async function search(search) {
         const query = `
             query ($search: String!) {
                 Page {
@@ -185,7 +185,7 @@ globalThis.aniList = {
     },
 
     //todo : add floating window feature with results from query
-    generateIcon(){
+    generateIcon: function generateIcon(){
         const anilistLink = document.createElement("a");
         const AnilistLogo = document.createElement("img");
         anilistLink.href = "https://anilist.co/search/anime?search="+encodeURIComponent(titleText);
