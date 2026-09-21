@@ -1,5 +1,7 @@
 //Reusable Utility functions for Tamper Monkey
 
+import { listen } from "node:quic";
+
 const dataFetch = {
     request({method = "GET", url, headers = {}, data = null, responseType = "json"}){
         return new Promise((resolve, reject) => {
@@ -45,7 +47,7 @@ const seriesGraph = {
         });
 
         return res.results?.map(({ id }) => id) ?? [];
-    }
+    },
 
     async generateIFrame() {
         const button = document.createElement("button");
@@ -85,6 +87,60 @@ const seriesGraph = {
         };
 
         return button;
+    },
+
+    addStyles(){
+        if (document.querySelector("#seriesGraphStyles")) return;
+
+        const style = document.createElement("style");
+        style.id = "seriesGraphStyles";
+
+        style.textContent = `
+            #seriesGraphIFRAMEButton {
+                width: 100%;
+                padding: 14px 18px;
+                margin-bottom: 16px;
+                background: rgb(17, 22, 29);
+                color: rgb(201, 215, 227);
+                border: 1px solid rgb(49, 56, 68);
+                border-radius: 10px;
+                font-size: 1.4rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition:
+                    background 0.18s ease,
+                    border-color 0.18s ease,
+                    transform 0.18s ease;
+            }
+
+            #seriesGraphIFRAMEButton:hover {
+                background: rgb(26, 33, 43);
+                border-color: rgb(61, 180, 242);
+            }
+
+            #seriesGraphIFRAMEButton:active {
+                transform: scale(0.985);
+            }
+
+            #seriesGraphIFRAMEContainer {
+                width: 100%;
+                height: 700px;
+                resize: vertical;
+                overflow: auto;
+                min-height: 400px;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0,0,0,.28);
+            }
+
+            #seriesGraphIFRAME {
+                width: 100%;
+                height: 100% !important;
+                border: none;
+                display: block;
+            }
+        `;
+
+        document.head.appendChild(style);
     }
 
 };
@@ -128,7 +184,7 @@ const aniList = {
         });
 
         return res.data.Page.media;
-    }
+    },
 
     //todo : add floating window feature with results from query
     generateIcon(){
