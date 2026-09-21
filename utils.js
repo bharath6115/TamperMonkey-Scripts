@@ -87,7 +87,7 @@ var seriesGraph = {
 
         const iframe = document.createElement("iframe");
         iframe.id = "seriesGraphIframe";
-        iframe.src = seriesGraph.generateSrc(title);
+        iframe.src = await seriesGraph.generateSrc(title);
 
         container.appendChild(iframe);
         block.append(button, container);
@@ -114,7 +114,7 @@ var seriesGraph = {
         div.style.marginLeft = "5px";
 
         const a = document.createElement("a");
-        a.href = seriesGraph.generateSrc(title);
+        a.href = await seriesGraph.generateSrc(title);
         a.target = "_blank";
         a.title = "SeriesGraph";
         a.className = "link";
