@@ -197,5 +197,10 @@ var aniList = {
         
         return AnilistLogo;
     }
+};
 
-}
+var test = {
+    greet : function greet(){
+        console.log("HELLO");
+    }
+};
