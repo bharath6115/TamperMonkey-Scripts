@@ -1,7 +1,8 @@
 //Reusable Utility functions for Tamper Monkey
 
 var dataFetch = {
-    request: function request({method = "GET", url, headers = {}, data = null, responseType = "json"}){
+    request:
+    function request({method = "GET", url, headers = {}, data = null, responseType = "json"}){
         return new Promise((resolve, reject) => {
             GM_xmlhttpRequest({
                 method,
@@ -38,7 +39,8 @@ var dataFetch = {
 
 var seriesGraph = {
 
-    search: async function search(query) {
+    search:
+    async function search(query) {
         const res = await dataFetch.request({
             method: "GET",
             url: `https://seriesgraph.com/api/shows/search?searchTerm=${encodeURIComponent(query)}`
@@ -47,15 +49,16 @@ var seriesGraph = {
         return res.results?.map(({ id }) => id) ?? [];
     },
 
-    generateIFrame: async function generateIFrame(title) {
+    generateIframe:
+    async function generateIframe(title) {
         const button = document.createElement("button");
-        button.id = "seriesGraphIFRAMEButton";
+        button.id = "seriesGraphIframeButton";
         button.textContent = "Expand Series Graph";
 
         const res = await seriesGraph.search(title);
 
         button.onclick = () => {
-            let container = document.querySelector("#seriesGraphIFRAMEContainer");
+            let container = document.querySelector("#seriesGraphIframeContainer");
 
             if (container) {
                 const hidden = container.style.display === "none";
@@ -69,10 +72,10 @@ var seriesGraph = {
             }
 
             container = document.createElement("div");
-            container.id = "seriesGraphIFRAMEContainer";
+            container.id = "seriesGraphIframeContainer";
 
             const iframe = document.createElement("iframe");
-            iframe.id = "seriesGraphIFRAME";
+            iframe.id = "seriesGraphIframe";
 
             iframe.src = res.length === 1
                 ? `https://seriesgraph.com/show/${res[0]}`
@@ -87,14 +90,15 @@ var seriesGraph = {
         return button;
     },
 
-    addStyles: function addStyles(){
+    addStyles:
+    function addStyles(){
         if (document.querySelector("#seriesGraphStyles")) return;
 
         const style = document.createElement("style");
         style.id = "seriesGraphStyles";
 
         style.textContent = `
-            #seriesGraphIFRAMEButton {
+            #seriesGraphIframeButton {
                 width: 100%;
                 padding: 14px 18px;
                 margin-bottom: 16px;
@@ -111,16 +115,16 @@ var seriesGraph = {
                     transform 0.18s ease;
             }
 
-            #seriesGraphIFRAMEButton:hover {
+            #seriesGraphIframeButton:hover {
                 background: rgb(26, 33, 43);
                 border-color: rgb(61, 180, 242);
             }
 
-            #seriesGraphIFRAMEButton:active {
+            #seriesGraphIframeButton:active {
                 transform: scale(0.985);
             }
 
-            #seriesGraphIFRAMEContainer {
+            #seriesGraphIframeContainer {
                 width: 100%;
                 height: 700px;
                 resize: vertical;
@@ -130,7 +134,7 @@ var seriesGraph = {
                 box-shadow: 0 10px 30px rgba(0,0,0,.28);
             }
 
-            #seriesGraphIFRAME {
+            #seriesGraphIframe {
                 width: 100%;
                 height: 100% !important;
                 border: none;
@@ -145,7 +149,8 @@ var seriesGraph = {
 
 var aniList = {
 
-    search: async function search(search) {
+    search:
+    async function search(search) {
         const query = `
             query ($search: String!) {
                 Page {
@@ -185,7 +190,8 @@ var aniList = {
     },
 
     //todo : add floating window feature with results from query
-    generateIcon: function generateIcon(){
+    generateIcon:
+    function generateIcon(){
         const anilistLink = document.createElement("a");
         const AnilistLogo = document.createElement("img");
         anilistLink.href = "https://anilist.co/search/anime?search="+encodeURIComponent(titleText);
@@ -200,7 +206,8 @@ var aniList = {
 };
 
 var test = {
-    greet : function greet(){
+    greet :
+    function greet(){
         console.log("HELLO");
     }
 };
