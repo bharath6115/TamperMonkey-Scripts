@@ -1,6 +1,6 @@
 //Reusable Utility functions for Tamper Monkey
 
-globalThis.dataFetch = {
+var dataFetch = {
     request: function request({method = "GET", url, headers = {}, data = null, responseType = "json"}){
         return new Promise((resolve, reject) => {
             GM_xmlhttpRequest({
@@ -36,7 +36,7 @@ globalThis.dataFetch = {
     }
 };
 
-globalThis.seriesGraph = {
+var seriesGraph = {
 
     search: async function search(query) {
         const res = await dataFetch.request({
@@ -143,7 +143,7 @@ globalThis.seriesGraph = {
 
 };
 
-globalThis.aniList = {
+var aniList = {
 
     search: async function search(search) {
         const query = `
