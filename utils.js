@@ -1,7 +1,5 @@
 //Reusable Utility functions for Tamper Monkey
 
-import { listen } from "node:quic";
-
 const dataFetch = {
     request({method = "GET", url, headers = {}, data = null, responseType = "json"}){
         return new Promise((resolve, reject) => {
