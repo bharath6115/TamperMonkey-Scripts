@@ -47,7 +47,7 @@ var animeUtils = {
             .replace(/[!?]+$/, '')
             .trim();
     }
-    
+
 };
 
 var seriesGraph = {
@@ -64,43 +64,38 @@ var seriesGraph = {
 
     generateIframe:
     async function generateIframe(title) {
+        const res = await seriesGraph.search(title);
+
+        const block = document.createElement("div");
+        block.id = "seriesGraphIframeBlock";
+
         const button = document.createElement("button");
         button.id = "seriesGraphIframeButton";
         button.textContent = "Expand Series Graph";
 
-        const res = await seriesGraph.search(title);
+        const container = document.createElement("div");
+        container.id = "seriesGraphIframeContainer";
+        container.style.display = "none";
+
+        const iframe = document.createElement("iframe");
+        iframe.id = "seriesGraphIframe";
+        iframe.src = res.length === 1
+            ? `https://seriesgraph.com/show/${res[0]}`
+            : `https://seriesgraph.com/show/search/${encodeURIComponent(title)}`;
+
+        container.appendChild(iframe);
+        block.append(button, container);
 
         button.onclick = () => {
-            let container = document.querySelector("#seriesGraphIframeContainer");
+            const hidden = container.style.display === "none";
 
-            if (container) {
-                const hidden = container.style.display === "none";
-
-                container.style.display = hidden ? "" : "none";
-                button.textContent = hidden
-                    ? "Collapse Series Graph"
-                    : "Expand Series Graph";
-
-                return;
-            }
-
-            container = document.createElement("div");
-            container.id = "seriesGraphIframeContainer";
-
-            const iframe = document.createElement("iframe");
-            iframe.id = "seriesGraphIframe";
-
-            iframe.src = res.length === 1
-                ? `https://seriesgraph.com/show/${res[0]}`
-                : `https://seriesgraph.com/show/search/${encodeURIComponent(title)}`;
-
-            container.appendChild(iframe);
-
-            button.insertAdjacentElement("afterEnd", container);
-            button.textContent = "Collapse Series Graph";
+            container.style.display = hidden ? "" : "none";
+            button.textContent = hidden
+                ? "Collapse Series Graph"
+                : "Expand Series Graph";
         };
 
-        return button;
+        return block;
     },
 
     addStyles:
