@@ -37,6 +37,19 @@ var dataFetch = {
     }
 };
 
+var animeUtils = {
+
+    cleanTitle:
+    function cleanTitle(text) {
+        return text
+            .replace(/(?:\s+)?(?:Season|S|2nd|3rd|4th|Part)\s+\d+/gi, '')
+            .split(/[:–-]/)[0]
+            .replace(/[!?]+$/, '')
+            .trim();
+    }
+    
+};
+
 var seriesGraph = {
 
     search:
