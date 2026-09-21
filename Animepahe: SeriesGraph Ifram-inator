@@ -2,7 +2,7 @@
 // @name         Animepahe: SeriesGraph Ifram-inator
 // @namespace    http://tampermonkey.net/
 // @version      2026-04-19
-// @description  try to take over the world!
+// @description  SeriesGraph iframe Generator in Animepahe
 // @author       Bharath
 // @match        https://animepahe.pw/anime/*
 // @match        https://animepahe.com/anime/*
