@@ -1,0 +1,42 @@
+// ==UserScript==
+// @name         Animepahe: SeriesGraph Ifram-inator
+// @namespace    http://tampermonkey.net/
+// @version      2026-04-19
+// @description  try to take over the world!
+// @author       Bharath
+// @match        https://animepahe.pw/anime/*
+// @match        https://animepahe.com/anime/*
+// @match        https://animepahe.si/anime/*
+// @match        https://animepahe.org/anime/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=animepahe.pw
+// @require      https://raw.githubusercontent.com/bharath6115/TamperMonkey-Scripts/refs/heads/main/utils.js
+// @grant        GM_xmlhttpRequest
+// @connect      seriesgraph.com
+// ==/UserScript==
+
+window.addEventListener("load",async function() {
+    'use strict';
+
+    const par = document.querySelectorAll(".anime-content")[0];
+    if(!par){
+        console.log("Parent query selector is broken.");
+        return;
+    }
+
+    const heading = document.querySelectorAll(".title-wrapper span")[0]
+    if(!heading){
+        console.log("Heading query selector is broken.");
+        return;
+    }
+
+    const title = animeUtils.cleanTitle(heading.innerText);
+    const block = await seriesGraph.generateIframe(title);
+
+    const div = document.createElement("div");
+    div.style.maxWidth = "800px";
+    div.style.margin = "0 auto 10px";
+    div.appendChild(block);
+
+    par.insertAdjacentElement("afterEnd",div);
+    seriesGraph.addStyles();
+});
