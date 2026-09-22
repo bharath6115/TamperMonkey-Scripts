@@ -55,6 +55,15 @@ These permissions are declared in each script's metadata block.
 
 Some scripts may also require access to external domains. Tampermonkey will display the requested permissions during installation.
 
+## 📷 Screenshots
+
+#### Ifram-inator in Animepahe:
+<img width="1189" height="839" alt="image" src="https://github.com/user-attachments/assets/08bc1efc-7d90-4af5-800a-ff4881891ca1" />
+
+#### Ifram-inator in AniList:
+<img width="1230" height="859" alt="image" src="https://github.com/user-attachments/assets/e43be1dd-c70b-4b24-a4e1-b88e901202f4" />
+
+
 ## 🛠️ Configuration
 
 Some scripts require personal configuration before they can be used.
