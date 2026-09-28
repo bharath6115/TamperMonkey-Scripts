@@ -58,10 +58,10 @@ Some scripts may also require access to external domains. Tampermonkey will disp
 ## 📷 Screenshots
 
 #### Ifram-inator in Animepahe:
-<img width="1189" height="839" alt="image" src="https://github.com/user-attachments/assets/08bc1efc-7d90-4af5-800a-ff4881891ca1" />
+<img width="1247" height="853" alt="image" src="https://github.com/user-attachments/assets/63579c3b-ab80-4fb0-b84f-61a89653d365" />
 
 #### Ifram-inator in AniList:
-<img width="1230" height="859" alt="image" src="https://github.com/user-attachments/assets/e43be1dd-c70b-4b24-a4e1-b88e901202f4" />
+<img width="1412" height="896" alt="image" src="https://github.com/user-attachments/assets/198b13bd-ded8-4940-9011-ec6b2a5447ae" />
 
 
 ## 🛠️ Configuration
