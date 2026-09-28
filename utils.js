@@ -210,20 +210,11 @@ var seriesGraph = {
                 cursor: pointer;
             }
 
+            #seriesGraphIframeButton:hover,
             #seriesGraphIframeRedirect:hover {
                 background: rgb(26, 33, 43);
                 border-color: rgb(61, 180, 242);
                 color: rgb(61, 180, 242);
-            }
-
-            #seriesGraphIframeButton:hover {
-                background: rgb(26, 33, 43);
-                border-color: rgb(61, 180, 242);
-            }
-
-            #seriesGraphIframeRedirect:active,
-            #seriesGraphIframeButton:active {
-                transform: scale(0.985);
             }
 
             #seriesGraphIframeContainer {
