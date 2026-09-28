@@ -173,9 +173,8 @@ var seriesGraph = {
             }
             
             #seriesGraphIframeRedirect {
-                width: 10%;
-                max-width:40px; 
-                font-size:20px;
+                width: 50px;
+                aspect-ratio: 1;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -186,8 +185,9 @@ var seriesGraph = {
             }
 
             #seriesGraphIframeButton{
-                width: 90%;
+                flex:1
                 padding: 14px 18px;
+                border: none;
                 border-left: 1px solid rgb(49, 56, 68);
                 border-radius: 0 10px 10px 0;
                 background: transparent;
@@ -199,6 +199,7 @@ var seriesGraph = {
             #seriesGraphIframeRedirect:hover,
             #seriesGraphIframeButton:hover {
                 background: rgb(26, 33, 43);
+                border-color: rgb(61, 180, 242);
             }
 
             #seriesGraphIframeRedirect:active,
