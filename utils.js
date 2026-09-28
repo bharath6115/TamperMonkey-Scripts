@@ -74,23 +74,36 @@ var seriesGraph = {
     generateIframe:
     async function generateIframe(title) {
 
+        const src = await seriesGraph.generateSrc(title);
+
         const block = document.createElement("div");
         block.id = "seriesGraphIframeBlock";
+
+        const header = document.createElement("div");
+        header.id = "seriesGraphIframeHeader";
+
+        const openInNewTab = document.createElement("a");
+        openInNewTab.id = "seriesGraphIframeRedirect";
+        openInNewTab.href = src;
+        openInNewTab.target = "_blank";
+        openInNewTab.innerText = "↗"
 
         const button = document.createElement("button");
         button.id = "seriesGraphIframeButton";
         button.textContent = "Expand Series Graph";
-
+        
         const container = document.createElement("div");
         container.id = "seriesGraphIframeContainer";
         container.style.display = "none";
-
+        
         const iframe = document.createElement("iframe");
         iframe.id = "seriesGraphIframe";
-        iframe.src = await seriesGraph.generateSrc(title);
-
+        iframe.src = src;
+        
+        header.append(openInNewTab,button);
         container.appendChild(iframe);
-        block.append(button, container);
+
+        block.append(header, container);
 
         button.onclick = () => {
             const hidden = container.style.display === "none";
@@ -138,12 +151,12 @@ var seriesGraph = {
         style.id = "seriesGraphStyles";
 
         style.textContent = `
-            #seriesGraphIframeButton {
+            #seriesGraphIframeHeader {
                 width: 100%;
-                padding: 14px 18px;
                 margin-bottom: 16px;
                 background: rgb(17, 22, 29);
                 color: rgb(201, 215, 227);
+                display: flex;
                 border: 1px solid rgb(49, 56, 68);
                 border-radius: 10px;
                 font-size: 1.4rem;
@@ -153,13 +166,37 @@ var seriesGraph = {
                     background 0.18s ease,
                     border-color 0.18s ease,
                     transform 0.18s ease;
+                box-sizing: border-box;
+            }
+            
+            #seriesGraphIframeRedirect {
+                width: 10%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px 0 0 10px;
+                border-right : 1px solid rgb(49, 56, 68);
+                text-decoration: none;
+                color: inherit;
             }
 
+            #seriesGraphIframeButton{
+                width: 90%;
+                padding: 14px 18px;
+                border: none;
+                border-radius: 0 10px 10px 0;
+                background: transparent;
+                color: inherit;
+                font: inherit;
+            }
+
+            #seriesGraphIframeRedirect:hover,
             #seriesGraphIframeButton:hover {
-                background: rgb(26, 33, 43);
                 border-color: rgb(61, 180, 242);
+                background: rgb(26, 33, 43);
             }
 
+            #seriesGraphIframeRedirect:active,
             #seriesGraphIframeButton:active {
                 transform: scale(0.985);
             }
