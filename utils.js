@@ -88,9 +88,23 @@ var seriesGraph = {
         openInNewTab.target = "_blank";
         openInNewTab.rel = "noopener noreferrer";
 
-        const icon = document.createElement("span");
-        icon.className = "glyphicon glyphicon-new-window";
-        openInNewTab.appendChild(icon);
+        openInNewTab.innerHTML = `
+            <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <path d="M14 3h7v7"/>
+                <path d="M10 14L21 3"/>
+                <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/>
+            </svg>
+        `;
 
         const button = document.createElement("button");
         button.id = "seriesGraphIframeButton";
@@ -196,7 +210,12 @@ var seriesGraph = {
                 cursor: pointer;
             }
 
-            #seriesGraphIframeRedirect:hover,
+            #seriesGraphIframeRedirect:hover {
+                background: rgb(26, 33, 43);
+                border-color: rgb(61, 180, 242);
+                color: rgb(61, 180, 242);
+            }
+
             #seriesGraphIframeButton:hover {
                 background: rgb(26, 33, 43);
                 border-color: rgb(61, 180, 242);
