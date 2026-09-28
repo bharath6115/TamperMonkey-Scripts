@@ -86,7 +86,11 @@ var seriesGraph = {
         openInNewTab.id = "seriesGraphIframeRedirect";
         openInNewTab.href = src;
         openInNewTab.target = "_blank";
-        openInNewTab.innerText = "↗"
+        openInNewTab.rel = "noopener noreferrer";
+
+        const icon = document.createElement("span");
+        icon.className = "glyphicon glyphicon-new-window";
+        openInNewTab.appendChild(icon);
 
         const button = document.createElement("button");
         button.id = "seriesGraphIframeButton";
@@ -161,7 +165,6 @@ var seriesGraph = {
                 border-radius: 10px;
                 font-size: 1.4rem;
                 font-weight: 600;
-                cursor: pointer;
                 transition:
                     background 0.18s ease,
                     border-color 0.18s ease,
@@ -171,6 +174,8 @@ var seriesGraph = {
             
             #seriesGraphIframeRedirect {
                 width: 10%;
+                max-width:40px; 
+                font-size:20px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -183,16 +188,16 @@ var seriesGraph = {
             #seriesGraphIframeButton{
                 width: 90%;
                 padding: 14px 18px;
-                border: none;
+                border-left: 1px solid rgb(49, 56, 68);
                 border-radius: 0 10px 10px 0;
                 background: transparent;
                 color: inherit;
                 font: inherit;
+                cursor: pointer;
             }
 
             #seriesGraphIframeRedirect:hover,
             #seriesGraphIframeButton:hover {
-                border-color: rgb(61, 180, 242);
                 background: rgb(26, 33, 43);
             }
 
