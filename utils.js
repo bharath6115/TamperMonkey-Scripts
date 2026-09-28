@@ -185,7 +185,7 @@ var seriesGraph = {
             }
 
             #seriesGraphIframeButton{
-                flex:1
+                flex:1;
                 padding: 14px 18px;
                 border: none;
                 border-left: 1px solid rgb(49, 56, 68);
